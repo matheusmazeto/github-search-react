@@ -1,21 +1,21 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { FaGithubAlt, FaPlus, FaSpinner } from "react-icons/fa";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { FaGithubAlt, FaPlus, FaSpinner } from 'react-icons/fa';
 
-import { api } from "../../services/api";
+import { api } from '../../services/api';
 
-import Container from "../../components/Container/index";
-import { Form, SubmitButton, List } from "./styles";
+import Container from '../../components/Container/index';
+import { Form, SubmitButton, List } from './styles';
 
 class Main extends Component {
   state = {
-    newRepo: "",
+    newRepo: '',
     repositories: [],
-    loading: false
+    loading: false,
   };
 
   componentDidMount() {
-    const repositories = localStorage.getItem("repositories");
+    const repositories = localStorage.getItem('repositories');
 
     if (repositories) {
       this.setState({ repositories: JSON.parse(repositories) });
@@ -26,7 +26,7 @@ class Main extends Component {
     const { repositories } = this.state;
 
     if (prevState.repositories !== repositories) {
-      localStorage.setItem("repositories", JSON.stringify(repositories));
+      localStorage.setItem('repositories', JSON.stringify(repositories));
     }
   }
 
@@ -44,13 +44,13 @@ class Main extends Component {
     const response = await api.get(`repos/${newRepo}`);
 
     const data = {
-      name: response.data.full_name
+      name: response.data.full_name,
     };
 
     this.setState({
       repositories: [...repositories, data],
-      newRepo: "",
-      loading: false
+      newRepo: '',
+      loading: false,
     });
   };
 

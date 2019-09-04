@@ -1,25 +1,25 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import { api } from "../../services/api";
+import { api } from '../../services/api';
 
-import Container from "../../components/Container";
-import { Loading, Owner, IssueList } from "./styles";
+import Container from '../../components/Container';
+import { Loading, Owner, IssueList } from './styles';
 
 class Repository extends Component {
   static propTypes = {
     match: PropTypes.shape({
       params: PropTypes.shape({
-        repository: PropTypes.string
-      })
-    }).isRequired
+        repository: PropTypes.string,
+      }),
+    }).isRequired,
   };
 
   state = {
     repository: {},
     issues: [],
-    loading: true
+    loading: true,
   };
 
   async componentDidMount() {
@@ -31,16 +31,16 @@ class Repository extends Component {
       api.get(`/repos/${repositoryName}`),
       api.get(`/repos/${repositoryName}/issues`, {
         params: {
-          state: "open",
-          per_page: 5
-        }
-      })
+          state: 'open',
+          per_page: 5,
+        },
+      }),
     ]);
 
     this.setState({
       repository: repository.data,
       issues: issues.data,
-      loading: false
+      loading: false,
     });
   }
 
